@@ -5,36 +5,72 @@
   <style>
     body {
       text-align: center;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      margin: 0;
+      padding: 0;
     }
+
     h1 {
-      color: #333;
+      color: #fff;
+      margin-top: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
+
     #board {
       display: grid;
       grid-template-columns: repeat(3, 100px);
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
-      margin-top: 30px;
+      margin-top: 40px;
     }
+
     .cell {
       width: 100px;
       height: 100px;
-      font-size: 2em;
-      background-color: white;
-      border: 2px solid #333;
+      font-size: 2.5rem;
+      font-weight: bold;
+      background-color: #ffffff;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s, transform 0.2s;
     }
+
+    .cell:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+    }
+
     #status {
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
+
     #reset {
-      margin-top: 10px;
-      padding: 8px 20px;
+      margin-top: 20px;
+      padding: 10px 25px;
       font-size: 16px;
+      background-color: #ffffff;
+      color: #333;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #reset:hover {
+      background-color: #eeeeee;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -84,7 +120,7 @@
       cells[index].textContent = currentPlayer;
 
       if (checkWin(currentPlayer)) {
-        status.textContent = `Player ${currentPlayer} wins!`;
+        status.textContent = `🎉 Player ${currentPlayer} wins!`;
         gameActive = false;
       } else if (cells.every(cell => cell.textContent !== "")) {
         status.textContent = "It's a draw!";
@@ -94,17 +130,3 @@
         status.textContent = `Player ${currentPlayer}'s turn`;
       }
     }
-
-    function checkWin(player) {
-      return winPatterns.some(pattern => {
-        return pattern.every(i => cells[i].textContent === player);
-      });
-    }
-
-    reset.addEventListener("click", createBoard);
-
-    createBoard();
-  </script>
-</body>
-</html>
-
